@@ -1,10 +1,13 @@
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 
-import style from "./Contact.module.css";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../../redux/contactsSlice";
 
-const Contact = ({ number, name, id, onDelete }) => {
-  const handleClick = () => {
-    onDelete(id);
+import style from "./Contact.module.css";
+const Contact = ({ number, name, id }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
   };
   return (
     <div className={style.container}>
@@ -16,7 +19,7 @@ const Contact = ({ number, name, id, onDelete }) => {
           <FaPhoneAlt className={style.icon} /> {number}
         </p>
       </div>
-      <button className={style.deleteButton} onClick={handleClick}>
+      <button className={style.deleteButton} onClick={handleDelete}>
         Delete
       </button>
     </div>
